@@ -9,7 +9,7 @@ stages.get("/", async (req, res) => {
   try {
     const foundStages = await Stage.findAll({
       where: {
-        name: { [Op.like]: `%${req.query.name}%` },
+        name: { [Op.like]: `%${req.query.name ? req.query.name : ""}%` },
       },
     });
     res.status(200).json(foundStages);

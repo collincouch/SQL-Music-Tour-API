@@ -9,7 +9,7 @@ events.get("/", async (req, res) => {
   try {
     const foundEvents = await Event.findAll({
       where: {
-        name: { [Op.like]: `%${req.query.name}%` },
+        name: { [Op.like]: `%${req.query.name ? req.query.name : ""}%` },
       },
     });
     res.status(200).json(foundEvents);
@@ -74,3 +74,6 @@ events.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// EXPORT
+module.exports = events;
